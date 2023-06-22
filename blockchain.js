@@ -36,13 +36,16 @@ class Blockchain {
         console.log(this.chain.length);
         console.log(chain.length);
         if(chain.length <= this.chain.length) {
+            console.error('New chain should be longer.');
             return;
         }
 
         if(!Blockchain.isValidChain(chain)) {
+            console.error('New chain should be valid.');
             return;
         }
 
+        console.log('Replacing chain with ', chain);
         this.chain = chain;
     }
 }
