@@ -1,5 +1,5 @@
 import Block from './block';
-import { GENESIS_DATA } from './config';
+import GENESIS_DATA from './config';
 
 describe('Block', () => {
     const timestamp = '';

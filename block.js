@@ -1,3 +1,5 @@
+import GENESIS_DATA from './config';
+
 class Block {
     constructor({ timestamp, lastHash, hash, data }) {
         this.timestamp = timestamp
@@ -5,6 +7,10 @@ class Block {
         this.hash = hash
         this.data = data
     }
+
+    static genesis = () => {
+        return new Block(GENESIS_DATA);
+    }
 }
 
-export default Block
+export default Block;
