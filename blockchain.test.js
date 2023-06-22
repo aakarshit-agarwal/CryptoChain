@@ -26,7 +26,7 @@ describe('Blockchain', () => {
         describe('when chain does not start with the genesis block', () => {
             it('returns false', () => {
                 blockchain.chain[0] = {data: 'Invalid/Fake Genesis Block'};
-                expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
+                expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
             });
 
             describe('when chain starts with the genesis block and has multiple blocks', () => {
@@ -40,7 +40,7 @@ describe('Blockchain', () => {
                     it('returns false', () => {
                         blockchain.chain[2].lastHash = 'broken-lastHash';
 
-                        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
+                        expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
                     });
                 });
 
@@ -48,13 +48,13 @@ describe('Blockchain', () => {
                     it('returns false', () => {
                         blockchain.chain[2].data = 'bad data';
 
-                        expect(blockchain.isValidChain(blockchain.chain)).toBe(false);
+                        expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
                     });
                 });
 
                 describe('and the chain does not contains any invalid block', () => {
                     it('returns true', () => {
-                        expect(blockchain.isValidChain(blockchain.chain)).toBe(true);
+                        expect(Blockchain.isValidChain(blockchain.chain)).toBe(true);
                     });
                 });
             });

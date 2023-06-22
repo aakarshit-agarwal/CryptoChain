@@ -14,7 +14,7 @@ class Blockchain {
         this.chain.push(newBlock);
     }
 
-    isValidChain = (chain) => {
+    static isValidChain = (chain) => {
         if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
             return false;
         }
