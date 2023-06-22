@@ -2,10 +2,12 @@ import Blockchain from './blockchain';
 import Block from './block';
 
 describe('Blockchain', () => {
-    let blockchain;
+    let blockchain, newChain, originalChain;
 
     beforeEach(() => {
         blockchain = new Blockchain();
+        newChain = new Blockchain();
+        originalChain = new Blockchain();
     });
     
     it('contains a `chain` Array instance', () => {
@@ -56,6 +58,37 @@ describe('Blockchain', () => {
                     it('returns true', () => {
                         expect(Blockchain.isValidChain(blockchain.chain)).toBe(true);
                     });
+                });
+            });
+        });
+    });
+
+    describe('replaceChain()', () => {
+        describe('when the new chain is not longer', () => {
+            it('does not replace the chain', () => {
+                    newChain.chain[0] = {new: 'chain'}
+                    blockchain.replaceChain(newChain.chain);
+                    expect(blockchain.chain).toEqual(originalChain.chain);
+            });
+        });
+        describe('when the new chain is longer', () => {
+            beforeEach(() => {
+                newChain.addBlock({ data: 'New First Block' });
+                newChain.addBlock({ data: 'New Second Block' });
+                newChain.addBlock({ data: 'New Third Block' });
+            });
+            describe('and the chain is invalid', () => {
+                it('does not replace the chain', () => {
+                    newChain.chain[2].hash = 'fakeHash'
+                    blockchain.replaceChain(newChain.chain);
+                    expect(blockchain.chain).toEqual(originalChain.chain);
+                });
+            });
+            describe('and the chain is valid', () => {
+                it('replaces the chain', () => {
+                  blockchain.replaceChain(newChain.chain);
+        
+                  expect(blockchain.chain).toEqual(newChain.chain);
                 });
             });
         });

@@ -31,6 +31,20 @@ class Blockchain {
         }
         return true;
     }
+
+    replaceChain = (chain) => {
+        console.log(this.chain.length);
+        console.log(chain.length);
+        if(chain.length <= this.chain.length) {
+            return;
+        }
+
+        if(!Blockchain.isValidChain(chain)) {
+            return;
+        }
+
+        this.chain = chain;
+    }
 }
 
 export default Blockchain;
