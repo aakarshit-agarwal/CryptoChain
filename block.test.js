@@ -77,6 +77,14 @@ describe('Block', () => {
                 '0'.repeat(minedBlock.difficulty)
             );
         });
+
+        it('adjusts the difficulty', () => {
+            const possibleResults = [
+                lastBlock.difficulty + 1,
+                lastBlock.difficulty - 1,
+            ];
+            expect(possibleResults.includes(minedBlock.difficulty)).toBe(true);
+        });
     });
 
     describe('adjustDifficulty()', () => {
@@ -96,6 +104,11 @@ describe('Block', () => {
                     timestamp: timestamp + MINE_RATE + 100,
                 })
             ).toEqual(block.difficulty - 1);
+        });
+
+        it('has a lower limit of 1', () => {
+            block.difficulty = -1;
+            expect(Block.adjustDifficulty({ originalBlock: block })).toEqual(1);
         });
     });
 });
