@@ -1,5 +1,7 @@
+const MINE_RATE = 1000;
+
 const GENESIS_DATA = {
-    timestamp: 1,
+    timestamp: 1000,
     lastHash: '----',
     hash: 'fakeHash',
     data: ['Fake', 'Data'],
@@ -7,4 +9,4 @@ const GENESIS_DATA = {
     nonce: 0,
 };
 
-export default GENESIS_DATA;
+export { GENESIS_DATA, MINE_RATE };

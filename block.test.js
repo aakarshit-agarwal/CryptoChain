@@ -1,5 +1,5 @@
 import Block from './block';
-import GENESIS_DATA from './config';
+import { GENESIS_DATA, MINE_RATE } from './config';
 import cryptoHash from './crypto-hash';
 
 describe('Block', () => {
@@ -76,6 +76,26 @@ describe('Block', () => {
             expect(minedBlock.hash.substring(0, minedBlock.difficulty)).toEqual(
                 '0'.repeat(minedBlock.difficulty)
             );
+        });
+    });
+
+    describe('adjustDifficulty()', () => {
+        it('raises the difficulty for quickly mined block', () => {
+            expect(
+                Block.adjustDifficulty({
+                    originalBlock: block,
+                    timestamp: timestamp + MINE_RATE - 100,
+                })
+            ).toEqual(block.difficulty + 1);
+        });
+
+        it('lowers the difficulty for slowly mined block', () => {
+            expect(
+                Block.adjustDifficulty({
+                    originalBlock: block,
+                    timestamp: timestamp + MINE_RATE + 100,
+                })
+            ).toEqual(block.difficulty - 1);
         });
     });
 });
