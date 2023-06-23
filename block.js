@@ -1,5 +1,6 @@
-import { GENESIS_DATA, MINE_RATE } from './config';
-import cryptoHash from './crypto-hash';
+import hexToBinary from 'hex-to-binary';
+import { GENESIS_DATA, MINE_RATE } from './config.js';
+import cryptoHash from './crypto-hash.js';
 
 class Block {
     constructor({ timestamp, lastHash, hash, data, difficulty, nonce }) {
@@ -34,7 +35,10 @@ class Block {
                 nonce,
                 data
             );
-        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));
+        } while (
+            hexToBinary(hash).substring(0, difficulty) !==
+            '0'.repeat(difficulty)
+        );
 
         return new Block({
             timestamp: timestamp,
