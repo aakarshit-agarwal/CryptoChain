@@ -5,7 +5,9 @@ import PubSub from './pubsub.js';
 
 const app = express();
 const blockchain = new Blockchain();
+const pubSub = new PubSub({ blockchain });
 
+setTimeout(() => pubSub.broadcastChain(), 1000);
 app.use(bodyParser.json());
 
 app.get('/api/blocks', (req, res) => {

@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 
 const CHANNELS = {
     TEST: 'TEST',
+    BLOCKCHAIN: 'BLOCKCHAIN',
 };
 
 class PubSub {
-    constructor() {
+    constructor({ blockchain }) {
         dotenv.config();
 
         const CREDENTIALS = {
@@ -15,27 +16,39 @@ class PubSub {
             secretKey: process.env.secretKey,
             uuid: process.env.uuid,
         };
-        console.log(CREDENTIALS);
+
+        this.blockchain = blockchain;
         this.pubnub = new PubNub(CREDENTIALS);
 
-        this.pubnub.subscribe({ channels: Object.values(CHANNELS) });
+        this.subscribeToChannels();
         this.pubnub.addListener(this.listener());
+    }
+
+    subscribeToChannels() {
+        this.pubnub.subscribe({ channels: Object.values(CHANNELS) });
     }
 
     listener() {
         return {
             message: (messageObject) => {
                 const { channel, message } = messageObject;
-
-                console.log(
-                    `Message received. Channel: ${channel}. Message: ${message}`
-                );
+                const parsedMessage = JSON.parse(message);
+                if (channel === CHANNELS.BLOCKCHAIN) {
+                    this.blockchain.replaceChain(parsedMessage);
+                }
             },
         };
     }
 
     publish({ channel, message }) {
         this.pubnub.publish({ channel, message });
+    }
+
+    broadcastChain() {
+        this.publish({
+            channel: CHANNELS.BLOCKCHAIN,
+            message: JSON.stringify(this.blockchain.chain),
+        });
     }
 }
 
