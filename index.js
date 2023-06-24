@@ -17,6 +17,7 @@ app.get('/api/blocks', (req, res) => {
 app.post('/api/mine', (req, res) => {
     const { data } = req.body;
     blockchain.addBlock({ data });
+    this.pubSub.broadcastChain();
     res.redirect('/api/blocks');
 });
 
