@@ -1,11 +1,20 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import Blockchain from './blockchain.js';
 
 const app = express();
 const blockchain = new Blockchain();
 
-app.get('/api/block', (req, res) => {
+app.use(bodyParser.json());
+
+app.get('/api/blocks', (req, res) => {
     res.json(blockchain.chain);
+});
+
+app.post('/api/mine', (req, res) => {
+    const { data } = req.body;
+    blockchain.addBlock({ data });
+    res.redirect('/api/blocks');
 });
 
 const APP_PORT = 3000;
