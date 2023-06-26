@@ -1,9 +1,9 @@
-import Wallet from './wallet.js';
+import Wallet from '.';
 
 describe('Wallet', () => {
     let wallet;
 
-    beforeWallet(() => {
+    beforeEach(() => {
         wallet = new Wallet();
     });
 
