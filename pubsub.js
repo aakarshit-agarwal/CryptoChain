@@ -41,7 +41,18 @@ class PubSub {
     }
 
     publish({ channel, message }) {
-        this.pubnub.publish({ channel, message });
+        const unsubscribePromise = this.pubnub.unsubscribe({
+            channels: Array.from(channel),
+        });
+        Promise.resolve(unsubscribePromise).then((_) => {
+            const publishPromise = this.pubnub.publish({ channel, message });
+            Promise.resolve(publishPromise).then((_) => {
+                const subscribePromise = this.pubnub.subscribe({
+                    channels: Array.from(channel),
+                });
+                Promise.resolve(subscribePromise).then((_) => {});
+            });
+        });
     }
 
     broadcastChain() {
