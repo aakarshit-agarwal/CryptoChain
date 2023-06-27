@@ -38,7 +38,7 @@ describe('Transaction', () => {
             expect(transaction).toHaveProperty('input');
         });
         it('has a `timestamp` in the input', () => {
-            expect(transaction).toHaveProperty('timestamp');
+            expect(transaction.input).toHaveProperty('timestamp');
         });
         it('sets the `amount` to the `senderWallet` balance', () => {
             expect(transaction.input.amount).toEqual(senderWallet.balance);
