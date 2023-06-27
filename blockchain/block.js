@@ -1,6 +1,6 @@
 import hexToBinary from 'hex-to-binary';
 import { GENESIS_DATA, MINE_RATE } from '../config.js';
-import cryptoHash from '../util/crypto-hash.js';
+import { cryptoHash } from '../util';
 
 class Block {
     constructor({ timestamp, lastHash, hash, data, difficulty, nonce }) {

@@ -1,6 +1,6 @@
 import { ec } from '../util';
 import { STARTING_BALANCE } from '../config';
-import cryptoHash from '../util/crypto-hash';
+import { cryptoHash } from '../util';
 
 class Wallet {
     constructor() {
