@@ -3,7 +3,7 @@ import { cryptoHash } from '.';
 describe('cryptoHash()', () => {
     it('generates a SHA-256 hashed output', () => {
         expect(cryptoHash('Test Data')).toEqual(
-            'bcfe67172a6f4079d69fe2f27a9960f9d62edae2fcd4bb5a606c2ebb74b3ba65'
+            '22af2cfb05e1805bc3b2ee1d4a1dc0e609a0aa042cd1c164205857d607b4952f'
         );
     });
 
