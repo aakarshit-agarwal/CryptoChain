@@ -1,5 +1,5 @@
 import Block from './block.js';
-import { cryptoHash } from '../util';
+import { cryptoHash } from '../util/index.js';
 
 class Blockchain {
     constructor() {

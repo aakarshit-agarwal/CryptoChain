@@ -1,13 +1,13 @@
-import Transaction from './transaction';
-import { ec } from '../util';
-import { STARTING_BALANCE } from '../config';
-import { cryptoHash } from '../util';
+import Transaction from './transaction.js';
+import { ecx } from '../util/index.js';
+import { STARTING_BALANCE } from '../config.js';
+import { cryptoHash } from '../util/index.js';
 
 class Wallet {
     constructor() {
         this.balance = STARTING_BALANCE;
 
-        this.keyPair = ec.genKeyPair();
+        this.keyPair = ecx.genKeyPair();
 
         this.publicKey = this.keyPair.getPublic().encode('hex');
     }

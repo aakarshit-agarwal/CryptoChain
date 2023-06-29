@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
-import Blockchain from './blockchain.js';
-import PubSub from './pubsub.js';
+import Blockchain from './blockchain/index.js';
+import PubSub from './app/pubsub.js';
 import TransactionPool from './wallet/transaction-pool.js';
 import Wallet from './wallet/index.js';
 

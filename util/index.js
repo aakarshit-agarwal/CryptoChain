@@ -1,11 +1,11 @@
-import { ec as EC } from 'elliptic';
-import cryptoHash from './crypto-hash';
+import ec from 'elliptic';
+import { cryptoHash } from './crypto-hash.js';
 
-const ec = new EC('secp256k1');
+const ecx = new ec.ec('secp256k1');
 
 const verifySignature = ({ publicKey, data, signature }) => {
-    const keyFromPublic = ec.keyFromPublic(publicKey, 'hex');
+    const keyFromPublic = ecx.keyFromPublic(publicKey, 'hex');
     return keyFromPublic.verify(cryptoHash(data), signature);
 };
 
-export { ec, verifySignature, cryptoHash };
+export { ecx, verifySignature, cryptoHash };

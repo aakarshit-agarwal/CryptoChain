@@ -1,5 +1,5 @@
 import { v1 as uuid } from 'uuid';
-import { varifySignature, verifySignature } from '../util';
+import { verifySignature } from '../util/index.js';
 
 class Transaction {
     constructor({ senderWallet, recipient, amount }) {
