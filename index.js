@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import request from 'request';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import Blockchain from './blockchain/index.js';
 import PubSub from './app/pubsub.js';
 import TransactionPool from './wallet/transaction-pool.js';
@@ -16,7 +18,7 @@ const transactionMiner = new TransactionMiner({
     blockchain,
     transactionPool,
     wallet,
-    pubsub,
+    pubSub,
 });
 
 const DEFAULT_PORT = 3000;
@@ -74,6 +76,14 @@ app.get('api/wallet-info', (req, res) => {
         address,
         balance: Wallet.calculateBalance({ chain: blockchain.chain, address }),
     });
+});
+
+app.get('*', (req, res) => {
+    const fileLocation = path.join(
+        path.dirname(fileURLToPath(import.meta.url)),
+        './client/index.html'
+    );
+    res.sendFile(fileLocation);
 });
 
 const syncWithRootState = () => {
