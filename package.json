@@ -4,6 +4,7 @@
     "description": "",
     "main": "index.js",
     "type": "module",
+    "proxy": "http://localhost:3000",
     "scripts": {
         "test": "jest --watchAll",
         "start": "npm run build-client && node index.js",

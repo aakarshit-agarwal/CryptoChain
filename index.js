@@ -71,7 +71,7 @@ app.get('/api/mine-transaction', (req, res) => {
     res.redirect('/api/blocks');
 });
 
-app.get('api/wallet-info', (req, res) => {
+app.get('/api/wallet-info', (req, res) => {
     const address = wallet.publicKey;
 
     res.json({
