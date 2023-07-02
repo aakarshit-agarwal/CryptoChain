@@ -21,10 +21,12 @@ const transactionMiner = new TransactionMiner({
     pubSub,
 });
 
+const CURRENT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(CURRENT_DIR, 'client')));
 
 app.get('/api/blocks', (req, res) => {
     res.json(blockchain.chain);
@@ -79,10 +81,7 @@ app.get('api/wallet-info', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    const fileLocation = path.join(
-        path.dirname(fileURLToPath(import.meta.url)),
-        './client/index.html'
-    );
+    const fileLocation = path.join(CURRENT_DIR, './client/index.html');
     res.sendFile(fileLocation);
 });
 
