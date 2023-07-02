@@ -1,7 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App';
 
-render(
-    <div>UPDATED 2: Cryptochain from React!</div>,
-    document.getElementById('root')
-);
+render(<App></App>, document.getElementById('root'));
