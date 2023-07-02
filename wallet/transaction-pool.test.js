@@ -1,7 +1,7 @@
 import TransactionPool from './transaction-pool';
 import Transaction from './transaction';
 import Wallet from '.';
-import Blockchain from '../blockchain.js';
+import Blockchain from '../blockchain';
 
 describe('TransactionPool', () => {
     let transactionPool, transaction, senderWallet;
