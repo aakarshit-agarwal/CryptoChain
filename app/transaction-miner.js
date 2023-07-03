@@ -1,20 +1,20 @@
 import Transaction from '../wallet/transaction.js';
 
 class TransactionMiner {
-    constructor({ blockchain, transactionPool, wallet, pubsub }) {
+    constructor({ blockchain, transactionPool, wallet, pubSub }) {
         this.blockchain = blockchain;
         this.transactionPool = transactionPool;
         this.wallet = wallet;
-        this.pubsub = pubsub;
+        this.pubSub = pubSub;
     }
 
-    mineTransaction = () => {
+    mineTransactions = () => {
         const validTransactions = this.transactionPool.validTransactions();
         validTransactions.push(
             Transaction.rewardTransaction({ minerWallet: this.wallet })
         );
         this.blockchain.addBlock({ data: validTransactions });
-        this.pubsub.broadcastChain();
+        this.pubSub.broadcastChain();
         this.transactionPool.clear();
     };
 }

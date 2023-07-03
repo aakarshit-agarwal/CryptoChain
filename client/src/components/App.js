@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Blocks from './Blocks';
 
 class App extends Component {
     state = { walletInfo: {} };
@@ -15,6 +16,8 @@ class App extends Component {
                 <div>Welcome to blockchain...</div>
                 <div>Address: {address}</div>
                 <div>Balance: {balance}</div>
+                <br></br>
+                <Blocks></Blocks>
             </>
         );
     }
