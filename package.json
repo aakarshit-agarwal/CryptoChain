@@ -4,11 +4,10 @@
     "description": "",
     "main": "index.js",
     "type": "module",
-    "proxy": "http://localhost:3000",
     "scripts": {
         "test": "jest --watchAll",
-        "start": "npm run build-client && node index.js",
-        "dev": "npm run dev-client & nodemon index.js",
+        "start": "npm run build-client & node index.js",
+        "dev": "npm run dev-client && GENERATE_PEER_PORT='development' nodemon index.js",
         "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
         "build-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
         "dev-client": "npm run clean && parcel client/src/index.html --out-dir client/dist",

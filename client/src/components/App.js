@@ -4,10 +4,9 @@ class App extends Component {
     state = { walletInfo: {} };
 
     componentDidMount() {
-        fetch('http://localhost:1234/api/wallet-info').then((res) =>
-            console.log(res)
-        );
-        // .then((json) => console.log(json));
+        fetch('http://localhost:3000/api/wallet-info')
+            .then((res) => res.json())
+            .then((json) => this.setState({ walletInfo: json }));
     }
     render() {
         const { address, balance } = this.state.walletInfo;
