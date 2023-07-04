@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import Transaction from './Transaction';
 import { Link } from 'react-router-dom';
 
@@ -26,6 +27,10 @@ class TransactionPool extends Component {
                         );
                     }
                 )}
+                <hr></hr>
+                <Button bsStyle='danger' onClick={this.mineTransactions}>
+                    Mine Transactions
+                </Button>
             </div>
         );
     }
@@ -46,6 +51,20 @@ class TransactionPool extends Component {
         fetch(`${document.location.origin}/api/transaction-pool-map`)
             .then((response) => response.json())
             .then((json) => this.setState({ transactionPoolMap: json }));
+    };
+
+    mineTransactions = () => {
+        fetch(`${document.location.origin}/api/mine-transactions`).then(
+            (response) => {
+                if (response.status === 200) {
+                    alert('success');
+                } else {
+                    alert(
+                        'The mine-transactions block request did not complete.'
+                    );
+                }
+            }
+        );
     };
 }
 
