@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Transaction from './Transaction';
 import { Link } from 'react-router-dom';
 
+const POLL_INTERVAL_MS = 10000;
+
 class TransactionPool extends Component {
     state = { transactionPoolMap: {} };
 
@@ -30,10 +32,18 @@ class TransactionPool extends Component {
 
     componentDidMount() {
         this.fetchTransactionsInPool();
+
+        this.fetchTransactionsInPoolInterval = setInterval(() => {
+            this.fetchTransactionsInPool();
+        }, POLL_INTERVAL_MS);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.fetchTransactionsInPoolInterval);
     }
 
     fetchTransactionsInPool = () => {
-        fetch('http://localhost:3000/api/transaction-pool-map')
+        fetch(`${document.location.origin}/api/transaction-pool-map`)
             .then((response) => response.json())
             .then((json) => this.setState({ transactionPoolMap: json }));
     };
